@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Welly Felix — IA e Dados</title>
+<meta name="description" content="Welly Felix — IA e Dados. AI Lead na Fuerza Studio, CEO da Overflow. Agentes, automação e produto com Claude Code, Python e SQL. Porto Alegre, RS." />
+<meta name="author" content="Welly Felix" />
+<meta name="theme-color" content="#0000FF" />
+<link rel="canonical" href="https://wellychonfelix.com/" />
+
+<meta property="og:type" content="profile" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:title" content="Welly Felix — IA e Dados" />
+<meta property="og:description" content="AI Lead na Fuerza Studio, CEO da Overflow. Agentes, automação e produto." />
+<meta property="og:image" content="assets/profile.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230000FF'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='18' font-weight='700' fill='%23F4F2EC' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E" />
+
+<script>document.documentElement.classList.add('js')</script>
+
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/space-grotesk-latin.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+
+<style>
+/* ---------------------------------------------------------------------------
+   Fontes self-hosted (subsets latin + latin-ext, variable). Nada de request
+   para CDN de terceiro: menos latência e nenhuma dependência externa.
+--------------------------------------------------------------------------- */
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:500 700;font-display:swap;
+  src:url("assets/fonts/space-grotesk-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:500 700;font-display:swap;
+  src:url("assets/fonts/space-grotesk-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;
+  src:url("assets/fonts/instrument-serif-italic-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;
+  src:url("assets/fonts/instrument-serif-italic-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400 500;font-display:swap;
+  src:url("assets/fonts/jetbrains-mono-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400 500;font-display:swap;
+  src:url("assets/fonts/jetbrains-mono-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+/* ---------------------------------------------------------------------------
+   Overflow design tokens — Overflow Blue, Acid Signal, Deep Ink, Bone Paper.
+   Três cores de destaque nunca aparecem juntas: aqui usamos blue + acid,
+   com ink/paper de base. Cantos retos em tudo (radius 0).
+--------------------------------------------------------------------------- */
+:root{
+  --primary:#0000FF;
+  --accent:#E5FF00;
+  --ink:#0A0A0A;
+  --paper:#F4F2EC;
+  --mute:#8A8A8A;
+  --rule:rgba(10,10,10,.12);
+
+  --bg:var(--paper);
+  --fg:var(--ink);
+  --card:rgba(10,10,10,.03);
+
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:56px; --s8:96px;
+  --out:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(20px,5vw,72px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:var(--ink);
+    --fg:var(--paper);
+    --mute:#8A8A8A;
+    --rule:rgba(244,242,236,.16);
+    --card:rgba(244,242,236,.04);
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--display);
+  font-weight:500;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* padding-inline (e não o shorthand) para que .hero/.sec/.cta possam definir
+   o padding vertical sem zerar as margens laterais — o que só aparecia no mobile. */
+.wrap{max-width:1280px;margin:0 auto;padding-inline:var(--pad)}
+.rule{border:0;border-top:1px solid var(--rule);margin:0}
+
+/* tipografia -------------------------------------------------------------- */
+.mono{
+  font-family:var(--mono);font-weight:400;font-size:11px;line-height:1.6;
+  text-transform:uppercase;letter-spacing:.12em;
+}
+.d1{font-family:var(--display);font-weight:700;font-size:clamp(52px,11.5vw,168px);line-height:.88;letter-spacing:-.04em;margin:0}
+.d2{font-family:var(--display);font-weight:600;font-size:clamp(32px,5vw,56px);line-height:.95;letter-spacing:-.025em;margin:0}
+.d3{font-family:var(--display);font-weight:600;font-size:clamp(20px,2.4vw,30px);line-height:1.12;letter-spacing:-.02em;margin:0}
+.serif{font-family:var(--serif);font-style:italic;font-weight:400}
+.lead{font-size:clamp(17px,1.55vw,21px);line-height:1.6;max-width:62ch;color:var(--fg);margin:0}
+.mute{color:var(--mute)}
+.blue{color:var(--primary)}
+
+/* label de seção ---------------------------------------------------------- */
+.sec{padding-block:clamp(56px,8vw,var(--s8))}
+/* o topo é sticky: sem isso o âncora joga o título para debaixo da barra */
+[id]{scroll-margin-top:76px}
+.sec-head{display:flex;align-items:baseline;gap:var(--s4);margin-bottom:var(--s7);flex-wrap:wrap}
+@media (max-width:760px){.sec-head{flex-direction:column;align-items:flex-start;gap:var(--s3);margin-bottom:var(--s6)}}
+.sec-head .mono{color:var(--mute)}
+.sec-head .mono::before{content:"";display:inline-block;width:6px;height:6px;background:var(--primary);margin-right:10px;vertical-align:2px}
+
+/* barra topo -------------------------------------------------------------- */
+.top{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);height:58px}
+.mark{font-family:var(--display);font-weight:700;letter-spacing:-.06em;font-size:19px;text-decoration:none}
+.mark:hover{color:var(--primary)}
+.nav{display:flex;gap:var(--s5)}
+.nav a{text-decoration:none;color:var(--mute);transition:color .12s var(--out)}
+.nav a:hover{color:var(--fg)}
+@media (max-width:820px){.nav{display:none}}
+.status{display:inline-flex;align-items:center;gap:8px;color:var(--mute)}
+.dot{width:7px;height:7px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 28%,transparent)}
+@media (prefers-reduced-motion:no-preference){.dot{animation:pulse 2.4s var(--out) infinite}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* hero -------------------------------------------------------------------- */
+.hero{padding-block:clamp(40px,7vw,84px) clamp(32px,5vw,56px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(24px,4vw,var(--s7));align-items:end}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;align-items:start}}
+.hero-role{margin:var(--s5) 0 0;font-size:clamp(15px,1.5vw,18px);font-weight:500;max-width:52ch;letter-spacing:-.01em}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);margin-top:var(--s5);color:var(--mute)}
+
+/* a foto: quadrada, sem raio, com a "quebra de grid" da peça — o bloco azul
+   deslocado atrás dela é a única licença que o layout se dá. */
+.photo{width:100%;max-width:300px}
+.photo-frame{position:relative;display:block}
+.photo-frame::after{
+  content:"";position:absolute;inset:14px -14px -14px 14px;
+  background:var(--primary);z-index:0;
+}
+.photo img{
+  position:relative;z-index:1;width:100%;aspect-ratio:1;object-fit:cover;
+  filter:grayscale(1) contrast(1.06);transition:filter .24s var(--out);
+}
+.photo:hover img{filter:none}
+.photo figcaption{margin-top:calc(var(--s5) + 14px);color:var(--mute)}
+
+.btns{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s6)}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:13px 20px;border-radius:0;text-decoration:none;cursor:pointer;
+  background:none;color:inherit;   /* zera o estilo nativo do <button> */
+  font-family:var(--mono);font-weight:400;font-size:11px;text-transform:uppercase;letter-spacing:.12em;
+  border:1px solid var(--fg);transition:transform .12s var(--out),background .12s var(--out),color .12s var(--out);
+}
+.btn:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn-primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-primary:hover{box-shadow:4px 4px 0 var(--fg)}
+.btn-ghost:hover{box-shadow:4px 4px 0 var(--primary)}
+
+/* ticker ------------------------------------------------------------------ */
+.ticker{border-block:1px solid var(--rule);overflow:hidden;padding-block:var(--s4);background:var(--card)}
+.ticker-track{display:flex;gap:var(--s6);width:max-content}
+@media (prefers-reduced-motion:no-preference){.ticker-track{animation:slide 38s linear infinite}}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker span{color:var(--mute);white-space:nowrap}
+.ticker span b{color:var(--fg);font-weight:400}
+
+/* números ----------------------------------------------------------------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule)}
+@media (max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:var(--s6) var(--s4) var(--s6) 0;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:0}
+@media (max-width:760px){.stat:nth-child(2n){border-right:0}.stat:nth-child(n+3){border-top:1px solid var(--rule)}}
+.stat b{display:block;font-size:clamp(34px,4.4vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1}
+.stat .mono{margin-top:var(--s3);color:var(--mute);display:block;max-width:22ch}
+
+/* sobre ------------------------------------------------------------------- */
+.about{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,5vw,var(--s8))}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+.about p+p{margin-top:var(--s5)}
+.quote{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(26px,3.4vw,40px);line-height:1.18;letter-spacing:-.01em;
+  border-left:2px solid var(--primary);padding-left:var(--s5);margin:0;
+}
+.quote cite{display:block;margin-top:var(--s5);font:400 11px/1.6 var(--mono);font-style:normal;text-transform:uppercase;letter-spacing:.12em;color:var(--mute)}
+
+/* timeline ---------------------------------------------------------------- */
+.job{
+  display:grid;grid-template-columns:200px minmax(0,1fr);gap:var(--s5);
+  padding:var(--s6) 0;border-top:1px solid var(--rule);
+}
+@media (max-width:760px){.job{grid-template-columns:1fr;gap:var(--s3)}}
+.job:last-of-type{border-bottom:1px solid var(--rule)}
+.job-when{color:var(--mute)}
+.job-when b{display:block;color:var(--fg);font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:-.01em;text-transform:none}
+.job h3{margin:0;font-size:clamp(19px,2vw,25px);font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.job h3 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--primary)}
+.job .where{margin:var(--s2) 0 0;color:var(--mute);font-size:14px}
+.job p.body{margin:var(--s4) 0 0;max-width:66ch;font-size:15px;line-height:1.62;color:color-mix(in srgb,var(--fg) 82%,var(--bg))}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4);padding:0;list-style:none}
+.chip{
+  font:400 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;
+  border:1px solid var(--rule);padding:7px 10px;color:var(--mute);
+}
+.chip-acid{border-color:var(--accent);color:var(--fg);background:color-mix(in srgb,var(--accent) 16%,transparent)}
+
+/* projetos ---------------------------------------------------------------- */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+@media (max-width:820px){.projects{grid-template-columns:1fr}.project{min-height:0}}
+.project{
+  background:var(--bg);padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4);
+  min-height:230px;text-decoration:none;transition:background .12s var(--out),color .12s var(--out);
+}
+.project:hover{background:var(--primary);color:#fff}
+.project:hover .mute,.project:hover .chip{color:rgba(255,255,255,.72);border-color:rgba(255,255,255,.4)}
+.project:hover .idx{color:rgba(255,255,255,.6)}
+.project .idx{color:var(--mute)}
+.project h3{margin:0;font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:-.025em;line-height:1.05}
+.project p{margin:0;font-size:15px;line-height:1.55;max-width:40ch}
+.project .foot{margin-top:auto}
+
+/* skills ------------------------------------------------------------------ */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,var(--s7))}
+@media (max-width:900px){.skills{grid-template-columns:1fr}}
+.skills h3{margin:0 0 var(--s4);font:400 11px/1.6 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--mute)}
+.skills ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:var(--s2)}
+
+/* formação ---------------------------------------------------------------- */
+.edu{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(24px,5vw,var(--s8))}
+@media (max-width:820px){.edu{grid-template-columns:1fr}}
+.edu-item{padding:var(--s5) 0;border-top:1px solid var(--rule)}
+.edu-item h3{margin:0 0 var(--s1);font-size:18px;font-weight:600;letter-spacing:-.015em}
+.edu-item p{margin:0;color:var(--mute);font-size:14px}
+
+/* cta / rodapé ------------------------------------------------------------ */
+.cta{border-top:1px solid var(--rule);padding-block:clamp(56px,9vw,120px)}
+.cta .d2{max-width:16ch}
+.cta-links{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s7)}
+.foot{border-top:1px solid var(--rule);padding-block:var(--s6) var(--s7)}
+.foot-in{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s5);flex-wrap:wrap}
+.wordmark{
+  width:clamp(140px,18vw,220px);height:auto;aspect-ratio:392/74;
+  background:currentColor;
+  -webkit-mask:url("assets/wordmark-src.svg") no-repeat center/contain;
+  mask:url("assets/wordmark-src.svg") no-repeat center/contain;
+  color:var(--primary);
+}
+.foot-meta{display:flex;gap:var(--s5);flex-wrap:wrap;color:var(--mute)}
+
+/* reveal — só esconde se o JS estiver vivo para revelar de volta ----------- */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{opacity:0;transform:translateY(16px);transition:opacity .48s var(--out),transform .48s var(--out)}
+  .js .rv.in{opacity:1;transform:none}
+}
+
+/* print — a própria página vira o PDF do currículo ------------------------- */
+@media print{
+  @page{margin:14mm}
+  :root{--bg:#fff;--fg:#000;--mute:#444;--rule:rgba(0,0,0,.2);--pad:0}
+  .top,.ticker,.btns,.photo-frame::after{display:none}
+  body{font-size:10pt}
+  .wrap{max-width:none}
+  .hero{padding-block:0 10pt}
+  .hero-grid{grid-template-columns:1fr 108px;gap:16pt;align-items:start}
+  .photo{max-width:108px}
+  .photo img{filter:grayscale(1)}
+  .d1{font-size:30pt}
+  .d2{font-size:16pt}
+  .lead,.hero-role{font-size:10pt}
+  .quote{font-size:14pt}
+  .sec{padding-block:10pt}
+  .sec-head{margin-bottom:10pt;gap:10pt}
+  .stat{padding:10pt 8pt 10pt 0}
+  .stat b{font-size:20pt}
+  .job{padding:9pt 0;grid-template-columns:110px 1fr;gap:12pt}
+  .job p.body{margin-top:5pt;font-size:9.5pt}
+  .project{min-height:0;padding:10pt;gap:6pt}
+  .projects{grid-template-columns:repeat(2,1fr)}
+  .chips{margin-top:6pt}
+  .edu-item{padding:8pt 0}
+  .cta{padding-block:14pt}
+  .cta-links{margin-top:12pt;gap:16pt}
+  .cta-links .btn{background:none;border:0;color:#000;padding:0}
+  .foot{padding-block:12pt}
+  .wordmark{width:110px}
+  .project,.job,.edu-item,.stat,.quote{break-inside:avoid}
+  .sec{break-inside:auto}
+  a{text-decoration:none}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#topo">[ovf]</a>
+    <nav class="nav mono" aria-label="Seções">
+      <a href="#sobre">Sobre</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#competencias">Competências</a>
+      <a href="#formacao">Formação</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <span class="mono status"><span class="dot" aria-hidden="true"></span>Aberto a projetos</span>
+  </div>
+</header>
+
+<main id="topo">
+
+  <!-- HERO ---------------------------------------------------------------- -->
+  <section class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <p class="mono mute" style="margin:0 0 var(--s5)">Currículo · Porto Alegre, RS · 2026</p>
+        <h1 class="d1">Welly<br />Felix</h1>
+        <p class="hero-role">
+          IA e Dados. Construo <em class="serif blue">agentes</em>, automações e produto —
+          de análise de funil a software sob medida que chega em produção.
+        </p>
+        <div class="hero-meta mono">
+          <span>AI Lead @ Fuerza Studio</span>
+          <span>CEO @ Overflow</span>
+          <span>Estrategista de IA @ Ventiur</span>
+        </div>
+        <div class="btns">
+          <a class="btn btn-primary" href="mailto:wellychonfelix@gmail.com">Falar comigo</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/wellyf" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/Wellychon" target="_blank" rel="noopener">GitHub ↗</a>
+          <button class="btn btn-ghost" type="button" data-print>Salvar em PDF</button>
+        </div>
+      </div>
+
+      <figure class="photo" style="margin:0">
+        <span class="photo-frame">
+          <img src="assets/profile.jpg" width="460" height="460" alt="Retrato de Welly Felix" />
+        </span>
+        <figcaption class="mono">Welly Felix<br />IA · Dados · Produto</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- TICKER -------------------------------------------------------------- -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track mono">
+      <span><b>Claude Code</b></span><span>·</span><span><b>Python</b></span><span>·</span>
+      <span><b>SQL Avançado</b></span><span>·</span><span><b>TypeScript</b></span><span>·</span>
+      <span><b>React</b></span><span>·</span><span><b>Next.js</b></span><span>·</span>
+      <span><b>Astro</b></span><span>·</span><span><b>Supabase</b></span><span>·</span>
+      <span><b>Postgres</b></span><span>·</span><span><b>Playwright</b></span><span>·</span>
+      <span><b>Power BI</b></span><span>·</span><span><b>Looker Studio</b></span><span>·</span>
+      <span><b>Docker</b></span><span>·</span><span><b>Salesforce</b></span><span>·</span>
+      <span><b>Claude Code</b></span><span>·</span><span><b>Python</b></span><span>·</span>
+      <span><b>SQL Avançado</b></span><span>·</span><span><b>TypeScript</b></span><span>·</span>
+      <span><b>React</b></span><span>·</span><span><b>Next.js</b></span><span>·</span>
+      <span><b>Astro</b></span><span>·</span><span><b>Supabase</b></span><span>·</span>
+      <span><b>Postgres</b></span><span>·</span><span><b>Playwright</b></span><span>·</span>
+      <span><b>Power BI</b></span><span>·</span><span><b>Looker Studio</b></span><span>·</span>
+      <span><b>Docker</b></span><span>·</span><span><b>Salesforce</b></span><span>·</span>
+    </div>
+  </div>
+
+  <!-- NÚMEROS ------------------------------------------------------------- -->
+  <section class="wrap sec" style="padding-top:0">
+    <div class="stats rv" style="border-top:0">
+      <div class="stat"><b>3+</b><span class="mono">anos entre operação, produto e dados</span></div>
+      <div class="stat"><b>10&nbsp;mil</b><span class="mono">jovens alcançados em palestras pelo RS</span></div>
+      <div class="stat"><b>Top 10</b><span class="mono">entre 20 mil candidatos no Geração Caldeira 25</span></div>
+      <div class="stat"><b>6</b><span class="mono">marcas atendidas: Globo, Google AI, Hyundai, Amazon, Magalu, John Deere</span></div>
+    </div>
+  </section>
+
+  <!-- SOBRE --------------------------------------------------------------- -->
+  <section class="wrap sec" id="sobre">
+    <div class="sec-head"><span class="mono">01 — Sobre</span><h2 class="d2">Estratégia que vira software.</h2></div>
+    <div class="about rv">
+      <div>
+        <p class="lead">
+          Vim da operação e do marketing, passei por dados e produto, e hoje trabalho na ponta em que
+          IA deixa de ser demo e vira coisa entregue. Uso SQL, Python e Power BI/Looker Studio para
+          estruturar e enxergar o dado, e IA generativa — Claude e Claude Code no dia a dia — para
+          prototipar rápido e validar antes de gastar sprint.
+        </p>
+        <p class="lead mute">
+          Tenho rodagem em análise de funil, testes A/B, CRM (Salesforce) e Growth Hacking, com projetos
+          ligados a Globo, Google AI, Hyundai, Amazon, Magazine Luiza e John Deere. Em 2026 me mudei de
+          Maceió para Porto Alegre para me aprofundar em IA e Dados pelo Instituto Caldeira, um dos
+          maiores hubs de inovação do Brasil — e fiquei.
+        </p>
+      </div>
+      <blockquote class="quote">
+        “We all have a problem to solve.”
+        <cite>Overflow — movimento de soluções</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- EXPERIÊNCIA --------------------------------------------------------- -->
+  <section class="wrap sec" id="experiencia">
+    <div class="sec-head"><span class="mono">02 — Experiência</span><h2 class="d2">Onde estive.</h2></div>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>2026 — atual</b>Porto Alegre, RS</div>
+      <div>
+        <h3>CEO &amp; co-fundador <em>—</em> Overflow</h3>
+        <p class="where">Software sob medida · fundada com o Derik</p>
+        <p class="body">
+          Software sob medida, SaaS para nichos e ferramentas que sobrevivem ao pitch deck.
+          Cuido de estratégia, cliente e produto; o Derik cuida da engenharia. Da conversa
+          inicial ao que entra em produção.
+        </p>
+        <ul class="chips">
+          <li class="chip">Produto</li><li class="chip">Design Thinking</li>
+          <li class="chip">Next.js</li><li class="chip">Supabase</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>jun 2026 — atual</b>Brasil</div>
+      <div>
+        <h3>Estrategista de Implementação de IA <em>—</em> Ventiur</h3>
+        <p class="where">Aceleradora · implementação de IA</p>
+        <p class="body">
+          Desenho e implantação de IA em operações reais: mapeio onde o processo trava,
+          escolho a ferramenta certa e coloco em uso com o time do cliente.
+        </p>
+        <ul class="chips">
+          <li class="chip">IA aplicada</li><li class="chip">Automação</li><li class="chip">Processos</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>mai 2026 — atual</b>Brasil &amp; EUA</div>
+      <div>
+        <h3>AI Lead <em>—</em> Fuerza Studio</h3>
+        <p class="where">Claude &amp; Claude Code</p>
+        <p class="body">
+          Desenvolvimento, validação e prototipação de soluções com IA: agentes, automações e produtos
+          digitais em fluxos de desenvolvimento assistido. Transformo necessidade de negócio em protótipo
+          funcional, testo a viabilidade técnica e ajudo a estruturar o MVP — passando por produto,
+          design e UX quando é preciso.
+        </p>
+        <ul class="chips">
+          <li class="chip chip-acid">Claude Code</li><li class="chip">Agentes de IA</li>
+          <li class="chip">Prototipação</li><li class="chip">MVP</li><li class="chip">UX</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>mar — mai 2026</b>Porto Alegre, RS</div>
+      <div>
+        <h3>Responsável por relacionamento <em>—</em> Instituto Caldeira</h3>
+        <p class="where">Programa Geração Caldeira</p>
+        <p class="body">
+          Multiplicador do Geração Caldeira, formação gratuita em tecnologia e inovação. Depois de me
+          destacar no programa, fui convidado a rodar o estado representando o Instituto em escolas
+          estaduais — mais de 10 mil jovens conectados a oportunidades em tecnologia, dados e IA,
+          incluindo acesso à Alura para estudantes em vulnerabilidade social.
+        </p>
+        <ul class="chips">
+          <li class="chip">Palestras</li><li class="chip">Relacionamento</li><li class="chip">Impacto social</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>nov 2025 — jan 2026</b>Maceió, AL</div>
+      <div>
+        <h3>Analista de QA · Time de Produto <em>—</em> Trakto</h3>
+        <p class="where">Startup de criação · 2 anos e 9 meses de casa</p>
+        <p class="body">
+          Qualidade de software em testes manuais e automatizados: criação de casos de teste, execução
+          de funcionais e não funcionais, reporte de bugs e trabalho junto do time de desenvolvimento
+          na correção e na melhoria contínua do produto.
+        </p>
+        <ul class="chips">
+          <li class="chip">QA</li><li class="chip">Testes automatizados</li><li class="chip">Playwright</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>jul — nov 2025</b>Porto Alegre, RS</div>
+      <div>
+        <h3>Assistente de projetos · Operações B2B <em>—</em> Trakto</h3>
+        <p class="where">Parcerias e contas estratégicas</p>
+        <p class="body">
+          Projetos escaláveis e parcerias B2B com contas como Hyundai e Amazon. Uso avançado de
+          ferramentas Google para automação, análise e integração de dados, correlacionando informações
+          de e-mail e plataformas digitais para gerar insight e apoiar decisão.
+        </p>
+        <ul class="chips">
+          <li class="chip">B2B</li><li class="chip">Automação</li><li class="chip">Análise de dados</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>mai 2023 — ago 2025</b>Maceió, AL</div>
+      <div>
+        <h3>Time de Operações <em>—</em> Trakto</h3>
+        <p class="where">2 anos e 4 meses</p>
+        <p class="body">
+          Rotina de operação de uma startup em crescimento: processo, suporte à entrega e a base
+          prática que depois virou leitura de dado e de produto.
+        </p>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>ago — dez 2025</b>Porto Alegre, RS</div>
+      <div>
+        <h3>Geração Caldeira 25 <em>—</em> Instituto Caldeira</h3>
+        <p class="where">Programa premiado na Alemanha e em Nova York</p>
+        <p class="body">
+          Selecionado entre mais de 20 mil candidatos para o grupo de 10 jovens em imersão presencial
+          em Porto Alegre, com todas as despesas custeadas. Aprofundei IA e Análise de Dados atuando
+          ao lado de grandes empresas, direcionei a carreira para Growth — melhoria de processo,
+          retenção e recorrência — e saí de lá com a minha primeira startup fundada.
+        </p>
+        <ul class="chips">
+          <li class="chip chip-acid">Top 10 / 20 mil</li><li class="chip">Growth</li><li class="chip">CRM</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>2023 — 2024</b>Maceió, AL</div>
+      <div>
+        <h3>Gerente geral · Líder de marketing <em>—</em> Nexa Alagoas</h3>
+        <p class="where">2 anos entre as duas funções</p>
+        <p class="body">
+          Gestão geral da operação e liderança de marketing: time, processo e resultado no mesmo
+          escopo. Onde aprendi a ler uma sala antes de a sala saber que está sendo lida.
+        </p>
+        <ul class="chips">
+          <li class="chip">Gestão</li><li class="chip">Marketing</li><li class="chip">Liderança</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job rv">
+      <div class="job-when mono"><b>2023 — 2024</b>Maceió, AL</div>
+      <div>
+        <h3>Designer Estratégico <em>—</em> Hangar Criativo</h3>
+        <p class="where">9 meses · também Embaixador do Talent Bootcamp (2024)</p>
+        <p class="body">
+          Design ligado a estratégia de negócio, não a entrega solta de peça. Em paralelo, embaixador
+          do Talent Bootcamp em Alagoas.
+        </p>
+        <ul class="chips">
+          <li class="chip">Design estratégico</li><li class="chip">Marca</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <!-- PROJETOS ------------------------------------------------------------ -->
+  <section class="wrap sec" id="projetos">
+    <div class="sec-head"><span class="mono">03 — Projetos</span><h2 class="d2">O que eu construí.</h2></div>
+    <div class="projects rv">
+
+      <a class="project" href="https://github.com/Wellychon" target="_blank" rel="noopener">
+        <span class="mono idx">001 / SaaS B2B</span>
+        <h3>Restauresse</h3>
+        <p>Plataforma B2B para distribuição de alimentos — pedido, catálogo e operação de quem vende para restaurante.</p>
+        <ul class="chips foot"><li class="chip">React</li><li class="chip">Node</li><li class="chip">Postgres</li></ul>
+      </a>
+
+      <a class="project" href="https://github.com/Wellychon" target="_blank" rel="noopener">
+        <span class="mono idx">002 / Automação</span>
+        <h3>Radar de Editais</h3>
+        <p>Monitoramento automatizado de editais: robô varre as fontes, normaliza o que achou e avisa só o que interessa.</p>
+        <ul class="chips foot"><li class="chip">Python</li><li class="chip">Playwright</li><li class="chip">Supabase</li></ul>
+      </a>
+
+      <a class="project" href="https://github.com/Wellychon" target="_blank" rel="noopener">
+        <span class="mono idx">003 / Agentes</span>
+        <h3>Over/Core</h3>
+        <p>Plataforma pessoal de coordenação — tarefas, contexto e agentes conversando comigo pelo Telegram.</p>
+        <ul class="chips foot"><li class="chip chip-acid">Claude</li><li class="chip">Supabase</li><li class="chip">Telegram</li></ul>
+      </a>
+
+      <a class="project" href="https://wellychonfelix.com" target="_blank" rel="noopener">
+        <span class="mono idx">004 / Site</span>
+        <h3>wellychonfelix.com</h3>
+        <p>Site pessoal, rápido e sem gordura. Estático, otimizado para SEO e para carregar em qualquer rede.</p>
+        <ul class="chips foot"><li class="chip">Astro</li><li class="chip">SEO</li></ul>
+      </a>
+
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- COMPETÊNCIAS -------------------------------------------------------- -->
+  <section class="wrap sec" id="competencias">
+    <div class="sec-head"><span class="mono">04 — Competências</span><h2 class="d2">Com o que trabalho.</h2></div>
+    <div class="skills rv">
+      <div>
+        <h3>IA &amp; Dados</h3>
+        <ul>
+          <li class="chip chip-acid">Claude &amp; Claude Code</li><li class="chip">Agentes de IA</li>
+          <li class="chip">SQL Avançado</li><li class="chip">Python</li>
+          <li class="chip">Power BI</li><li class="chip">Looker Studio</li>
+          <li class="chip">Análise de funil</li><li class="chip">Testes A/B</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Engenharia &amp; Produto</h3>
+        <ul>
+          <li class="chip">TypeScript</li><li class="chip">React</li><li class="chip">Next.js</li>
+          <li class="chip">Astro</li><li class="chip">Node</li><li class="chip">Supabase</li>
+          <li class="chip">Postgres</li><li class="chip">Playwright</li><li class="chip">Docker</li>
+          <li class="chip">QA / Automação</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Negócio</h3>
+        <ul>
+          <li class="chip">Growth Hacking</li><li class="chip">CRM / Salesforce</li>
+          <li class="chip">Relacionamento B2B</li><li class="chip">Metodologias ágeis</li>
+          <li class="chip">Design Thinking</li><li class="chip">Gestão de time</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAÇÃO ------------------------------------------------------------ -->
+  <section class="wrap sec" id="formacao">
+    <div class="sec-head"><span class="mono">05 — Formação</span><h2 class="d2">Estudo &amp; reconhecimento.</h2></div>
+    <div class="edu rv">
+      <div class="edu-item">
+        <h3>FIAP</h3>
+        <p>Gestão de Tecnologia da Informação · 2026 — 2028</p>
+      </div>
+      <div class="edu-item">
+        <h3>Estácio</h3>
+        <p>Marketing · 2024 — 2026</p>
+      </div>
+      <div class="edu-item">
+        <h3>Udemy</h3>
+        <p>Programação JavaScript · 2024</p>
+      </div>
+      <div class="edu-item">
+        <h3>Instituto Federal de Alagoas</h3>
+        <p>Programação Python e PHP · 2019</p>
+      </div>
+      <div class="edu-item">
+        <h3>Claude Code in Action <span class="mono blue" style="letter-spacing:.12em">· Certificação</span></h3>
+        <p>Anthropic</p>
+      </div>
+      <div class="edu-item">
+        <h3>Inspire Awards <span class="mono blue" style="letter-spacing:.12em">· Prêmio</span></h3>
+        <p>Líder de Programação</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA ----------------------------------------------------------------- -->
+  <section class="wrap cta" id="contato">
+    <span class="mono mute">06 — Contato</span>
+    <h2 class="d2" style="margin-top:var(--s5)">Tem um problema? <em class="serif blue">Traz.</em></h2>
+    <p class="lead mute" style="margin-top:var(--s5)">Porto Alegre, RS · disponível para projetos, remoto ou presencial.</p>
+    <div class="cta-links">
+      <a class="btn btn-primary" href="mailto:wellychonfelix@gmail.com">wellychonfelix@gmail.com</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/wellyf" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn btn-ghost" href="https://github.com/Wellychon" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://wellychonfelix.com" target="_blank" rel="noopener">Site ↗</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="wordmark" role="img" aria-label="Overflow"></div>
+    <div class="foot-meta mono">
+      <span>© 2026 Welly Felix</span>
+      <span>Porto Alegre · RS</span>
+      <span>We all have a problem to solve</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// reveal on scroll — desligado quando o usuário pede menos movimento
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+
+document.querySelector('[data-print]').addEventListener('click', function () { window.print(); });
+</script>
+
+</body>
+</html>
